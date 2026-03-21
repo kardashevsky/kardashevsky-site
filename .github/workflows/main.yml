@@ -41,18 +41,31 @@ jobs:
           path: dist
 
   deploy:
-    name: Debug SSH paths
+    name: Deploy via SSH
     runs-on: ubuntu-latest
     needs: ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     steps:
+      - name: Download dist
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Show remote paths
+      - name: Clean target dir
         run: |
           sshpass -p "${{ secrets.REG_PASSWORD }}" ssh \
             -o StrictHostKeyChecking=no \
             "${{ secrets.REG_USER }}@${{ secrets.REG_HOST }}" \
-            "pwd && ls -la && echo '---' && ls -la www && echo '---' && ls -la www/kardashevsky.com"
+            "find '${{ secrets.REG_SERVER_DIR }}' -mindepth 1 -maxdepth 1 ! -name '.well-known' ! -name '.htaccess' -exec rm -rf {} +"
+
+      - name: Upload dist
+        run: |
+          sshpass -p "${{ secrets.REG_PASSWORD }}" scp -r \
+            -o StrictHostKeyChecking=no \
+            dist/* \
+            "${{ secrets.REG_USER }}@${{ secrets.REG_HOST }}:${{ secrets.REG_SERVER_DIR }}"
