@@ -1,4 +1,4 @@
-name: Frontend CI/CD
+name: personal-site
 
 on:
   push:
@@ -41,7 +41,7 @@ jobs:
           path: dist
 
   deploy:
-    name: Deploy to REG.RU
+    name: Deploy via SSH
     runs-on: ubuntu-latest
     needs: ci
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -53,11 +53,19 @@ jobs:
           name: dist
           path: dist
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
-        with:
-          server: ${{ secrets.REG_HOST }}
-          username: ${{ secrets.REG_USER }}
-          password: ${{ secrets.REG_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ secrets.REG_SERVER_DIR }}
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Clean target dir
+        run: |
+          sshpass -p "${{ secrets.REG_PASSWORD }}" ssh \
+            -o StrictHostKeyChecking=no \
+            "${{ secrets.REG_USER }}@${{ secrets.REG_HOST }}" \
+            "find '${{ secrets.REG_SERVER_DIR }}' -mindepth 1 -maxdepth 1 ! -name '.well-known' -exec rm -rf {} +"
+
+      - name: Upload dist
+        run: |
+          sshpass -p "${{ secrets.REG_PASSWORD }}" scp -r \
+            -o StrictHostKeyChecking=no \
+            dist/* \
+            "${{ secrets.REG_USER }}@${{ secrets.REG_HOST }}:${{ secrets.REG_SERVER_DIR }}"
