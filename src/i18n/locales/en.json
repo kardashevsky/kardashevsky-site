@@ -1,7 +1,8 @@
 {
   "home": {
     "firstName": "DMITRY",
-    "lastName": "KARDASHEVSKY"
+    "lastName": "KARDASHEVSKY",
+    "resumeButton": "Resume"
   },
   "about": {
     "eyebrow": "About",
