@@ -1,0 +1,52 @@
+.header {
+  width: 100%;
+  border-bottom: 1px solid #000;
+  background: #FCF9F0;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  color: #000;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.link {
+  color: #000;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  transition: opacity 0.15s ease;
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

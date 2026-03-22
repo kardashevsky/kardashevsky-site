@@ -1,0 +1,36 @@
+{
+  "home": {
+    "firstName": "DMITRY",
+    "lastName": "KARDASHEVSKY"
+  },
+  "about": {
+    "eyebrow": "About",
+    "title": "Content is coming soon.",
+    "description": "This page is under development. Later, it will include information about me, my experience, and my approach to work."
+  },
+  "projects": {
+    "eyebrow": "Projects",
+    "title": "Projects are coming soon.",
+    "description": "This section is under development. It will include key projects with descriptions and tech stack."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let’s talk",
+    "description": "Open to frontend roles, product work, and strong digital projects.",
+    "telegram": "Telegram",
+    "email": "Email"
+  },
+  "resume": {
+    "eyebrow": "Resume",
+    "name": "Dmitry Kardashevsky",
+    "description": "Frontend developer focused on building scalable, clean and performant interfaces.",
+    "view": "View PDF",
+    "download": "Download"
+  }
+}
