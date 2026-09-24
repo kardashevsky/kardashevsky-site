@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
-import type { ComponentProps } from "react"
+import type { ComponentProps, ReactNode } from "react"
 import styles from "./LinkButton.module.css"
 
 type LinkButtonProps = ComponentProps<typeof Link> & {
-  children: React.ReactNode
+  children: ReactNode
   className?: string
 }
 
@@ -17,7 +17,10 @@ export function LinkButton({
       {...props}
       className={`${styles.button} ${className ?? ""}`}
     >
-      {children}
+      <span>{children}</span>
+      <span className={styles.arrow} aria-hidden="true">
+        ↗
+      </span>
     </Link>
   )
 }
