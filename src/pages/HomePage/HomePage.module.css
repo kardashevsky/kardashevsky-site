@@ -1,31 +1,92 @@
 .home {
   position: relative;
   flex: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.home::before {
+  content: "";
+  position: absolute;
+
+  left: -30%;
+  right: -30%;
+  top: 52%;
+  height: 75%;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.075) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.055) 1px,
+      transparent 1px
+    );
+
+  background-size: 48px 48px;
+
+  transform:
+    perspective(600px)
+    rotateX(64deg)
+    scale(1.35);
+
+  transform-origin: center top;
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.8) 18%,
+    #000 45%,
+    transparent 95%
+  );
+
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.8) 18%,
+    #000 45%,
+    transparent 95%
+  );
+
+  pointer-events: none;
+  z-index: -1;
 }
 
 .content {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   text-align: center;
 
   transform: translateY(-4vh);
 }
 
 .face {
-  width: clamp(240px, 16vw + 80px, 320px);
+  width: clamp(240px, calc(16vw + 80px), 320px);
   height: auto;
+
   object-fit: contain;
   flex-shrink: 0;
 
   user-select: none;
   -webkit-user-drag: none;
 
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.12));
+  filter: drop-shadow(
+    0 8px 12px rgba(0, 0, 0, 0.12)
+  );
+
   animation: levitate 5s ease-in-out infinite;
 }
 
@@ -45,9 +106,7 @@
 
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-
   font-size: clamp(42px, calc(3vw + 24px), 96px);
-
   line-height: 0.9;
   letter-spacing: -0.02em;
 
