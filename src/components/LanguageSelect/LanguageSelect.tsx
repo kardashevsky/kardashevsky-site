@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { SUPPORTED_LANGUAGES, type SupportedLanguage } from "../../i18n"
 import styles from "./LanguageSelect.module.css"
@@ -12,38 +13,69 @@ function normalizeLanguage(language?: string): SupportedLanguage {
 
 export default function LanguageSelect() {
   const { i18n } = useTranslation()
+  const [isOpen, setIsOpen] = useState(false)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   const currentLanguage = normalizeLanguage(
     i18n.resolvedLanguage ?? i18n.language,
   )
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const nextLanguage = event.target.value as SupportedLanguage
+  const handleChange = (language: SupportedLanguage) => {
+    if (language !== currentLanguage) {
+      void i18n.changeLanguage(language)
+    }
 
-    if (nextLanguage === currentLanguage) return
-
-    void i18n.changeLanguage(nextLanguage)
+    setIsOpen(false)
   }
 
-  return (
-    <div className={styles.wrapper}>
-      <label htmlFor="language-select" className={styles.label}>
-        Language
-      </label>
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false)
+      }
+    }
 
-      <select
-        id="language-select"
-        className={styles.select}
-        value={currentLanguage}
-        onChange={handleChange}
-        aria-label="Select language"
+    document.addEventListener("mousedown", handleClickOutside)
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
+
+  return (
+    <div className={styles.wrapper} ref={wrapperRef}>
+      <button
+        type="button"
+        className={`${styles.select} ${isOpen ? styles.open : ""}`}
+        onClick={() => setIsOpen((prev) => !prev)}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
       >
-        {SUPPORTED_LANGUAGES.map((language) => (
-          <option key={language} value={language}>
-            {language.toUpperCase()}
-          </option>
-        ))}
-      </select>
+        {currentLanguage.toUpperCase()}
+        <span className={styles.arrow} />
+      </button>
+
+      {isOpen && (
+        <div className={styles.dropdown} role="listbox">
+          {SUPPORTED_LANGUAGES
+            .filter((language) => language !== currentLanguage)
+            .map((language) => (
+            <button
+              key={language}
+              type="button"
+              className={styles.option}
+              onClick={() => handleChange(language)}
+              role="option"
+              aria-selected={language === currentLanguage}
+            >
+              {language.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
