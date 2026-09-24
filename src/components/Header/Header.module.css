@@ -34,8 +34,8 @@
   cursor: pointer;
 
   transition:
-    transform 100ms ease,
-    filter 100ms ease;
+    transform 90ms ease-out,
+    filter 90ms ease-out;
 }
 
 .logoImage {
@@ -46,8 +46,8 @@
 }
 
 .logo:active {
-  transform: scale(0.88);
-  filter: brightness(0.7);
+  transform: scale(0.96);
+  filter: brightness(0.9);
 }
 
 .logoSpin {
@@ -93,11 +93,16 @@
 
   transition:
     background-color 160ms ease,
-    color 160ms ease;
+    color 160ms ease,
+    transform 100ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .link:hover {
   background-color: #c47a5a80;
+}
+
+.link:active {
+  transform: scale(0.97);
 }
 
 .link.active {
@@ -134,6 +139,12 @@
   flex-direction: column;
 
   gap: 5px;
+
+  transition: transform 90ms ease-out;
+}
+
+.menuButton:active {
+  transform: scale(0.96);
 }
 
 .menuButton span {
@@ -145,8 +156,8 @@
   background: #000;
 
   transition:
-    transform 200ms ease,
-    opacity 200ms ease;
+    transform 160ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 100ms ease;
 }
 
 
