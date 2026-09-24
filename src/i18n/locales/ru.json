@@ -1,7 +1,9 @@
 {
   "home": {
-    "firstName": "DMITRY",
-    "lastName": "KARDASHEVSKY"
+    "firstName": "ДМИТРИЙ",
+    "lastName": "КАРДАШЕВСКИЙ",
+    "positioning": "СОЗДАЮ ЦИФРОВЫЕ ПРОДУКТЫ",
+    "aboutButton": "ОБО МНЕ"
   },
   "about": {
     "eyebrow": "Обо мне",

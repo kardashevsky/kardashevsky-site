@@ -1,7 +1,9 @@
 {
   "home": {
     "firstName": "DMITRY",
-    "lastName": "KARDASHEVSKY"
+    "lastName": "KARDASHEVSKY",
+    "positioning": "I CREATE DIGITAL PRODUCTS",
+    "aboutButton": "ABOUT ME"
   },
   "about": {
     "eyebrow": "About",

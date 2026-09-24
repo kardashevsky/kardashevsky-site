@@ -1,0 +1,15 @@
+.page {
+  flex: 1;
+  display: flex;
+  opacity: 1;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 240ms ease-out;
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 140ms ease-in;
+}

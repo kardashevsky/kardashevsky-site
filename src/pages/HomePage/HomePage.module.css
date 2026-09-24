@@ -1,11 +1,9 @@
 .home {
   position: relative;
   flex: 1;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   overflow: hidden;
   isolation: isolate;
 }
@@ -13,7 +11,6 @@
 .home::before {
   content: "";
   position: absolute;
-
   left: -30%;
   right: -30%;
   top: 52%;
@@ -73,42 +70,13 @@
   transform: translateY(-4vh);
 }
 
-.face {
-  width: clamp(240px, calc(16vw + 80px), 320px);
-  height: auto;
-
-  object-fit: contain;
-  flex-shrink: 0;
-
-  user-select: none;
-  -webkit-user-drag: none;
-
-  filter: drop-shadow(
-    0 8px 12px rgba(0, 0, 0, 0.12)
-  );
-
-  animation: levitate 5s ease-in-out infinite;
-}
-
-@keyframes levitate {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
 .title {
   margin: clamp(16px, 1.5vw, 24px) 0 0;
 
   font-family: "Montserrat", sans-serif;
   font-weight: 900;
-  font-size: clamp(42px, calc(3vw + 24px), 96px);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  line-height: 0.88;
+  letter-spacing: -0.035em;
 
   text-align: center;
   user-select: none;
@@ -118,33 +86,73 @@
   display: block;
 }
 
-/* Будущие стрелки */
-
-.arrowLeft,
-.arrowRight {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.firstName {
+  font-size: clamp(
+    36px,
+    calc(2.6vw + 18px),
+    78px
+  );
 }
 
-.arrowLeft {
-  left: 32px;
+.lastName {
+  margin-top: 0.04em;
+
+  font-size: clamp(
+    46px,
+    calc(3.6vw + 24px),
+    108px
+  );
 }
 
-.arrowRight {
-  right: 32px;
+.positioning {
+  margin: clamp(16px, 1.5vw, 22px) 0 0;
+
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(
+    12px,
+    calc(0.55vw + 6px),
+    16px
+  );
+
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: rgba(2, 2, 2, 0.72);
+
+  white-space: nowrap;
+  user-select: none;
 }
 
-@media (max-width: 768px) {
-  .face {
-    width: clamp(200px, 55vw, 240px);
+@media (max-width: 700px) {
+  .content {
+    width: 100%;
+    box-sizing: border-box;
+    transform: translateY(-7vh);
   }
 
-  .arrowLeft {
-    left: 16px;
+  .title {
+    width: calc(100% - 24px);
+    margin: 14px auto 0;
   }
 
-  .arrowRight {
-    right: 16px;
+  .firstName {
+    font-size: 10vw;
+  }
+
+  .lastName {
+    margin-top: 0.04em;
+    font-size: 10vw;
+    letter-spacing: -0.045em;
+    white-space: nowrap;
+  }
+
+  .positioning {
+    margin-top: 16px;
+    font-size: 2.7vw;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
   }
 }
