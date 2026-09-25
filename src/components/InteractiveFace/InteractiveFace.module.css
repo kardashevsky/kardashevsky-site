@@ -27,8 +27,12 @@
     0 8px 12px rgba(0, 0, 0, 0.12)
   );
 
-  animation:
-    levitate 5s ease-in-out infinite;
+  animation: levitate 5s ease-in-out infinite;
+
+  will-change:
+    transform,
+    translate,
+    scale;
 }
 
 .hitArea {
@@ -50,7 +54,9 @@
 
   background: transparent;
 
-  cursor: pointer;
+  cursor:
+    url('/cursor/Pointer.png') 0 0,
+    pointer;
 
   clip-path:
     ellipse(
@@ -64,12 +70,17 @@
       at 50% 50%
     );
 
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
 
 .hitArea:focus,
 .hitArea:focus-visible {
   outline: none;
+}
+
+.hitArea:active {
+  cursor: var(--cursor-grabbing);
 }
 
 .heart {
@@ -91,7 +102,9 @@
 
   opacity: 0;
 
-  will-change: transform, opacity;
+  will-change:
+    transform,
+    opacity;
 
   animation:
     heartFloat

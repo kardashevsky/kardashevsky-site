@@ -24,13 +24,59 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --cursor-default:
+    url('/cursor/Arrow.png') 0 0,
+    default;
+
+  --cursor-pointer:
+    url('/cursor/Pointer.png') 0 0,
+    pointer;
+
+  --cursor-grab:
+    url('/cursor/Grab.png') 0 0,
+    grab;
+
+  --cursor-grabbing:
+    url('/cursor/Grabbed.png') 0 0,
+    grabbing;
 }
 
-html, body {
+html,
+body {
+  margin: 0;
+  overflow-x: hidden;
+
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
+
   touch-action: manipulation;
-  margin: 0;
-  overflow-x: hidden;
+
+  cursor: var(--cursor-default);
+}
+
+a,
+button,
+[role='button'],
+summary,
+label[for] {
+  cursor: var(--cursor-pointer);
+}
+
+input,
+textarea,
+[contenteditable='true'] {
+  -webkit-user-select: text;
+  user-select: text;
+  cursor: text;
+}
+
+.cursor-grab {
+  cursor: var(--cursor-grab);
+}
+
+.cursor-grab:active,
+.cursor-grabbing {
+  cursor: var(--cursor-grabbing);
 }

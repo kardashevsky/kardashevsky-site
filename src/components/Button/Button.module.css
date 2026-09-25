@@ -2,7 +2,7 @@
   appearance: none;
   border: 0;
   outline: 0;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   display: inline-flex;
   align-items: center;
