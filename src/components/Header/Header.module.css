@@ -33,38 +33,61 @@
   text-decoration: none;
   cursor: var(--cursor-pointer);
 
-  transition:
-    transform 90ms ease-out,
-    filter 90ms ease-out;
+  transition: transform 90ms ease-out;
 }
 
 .logoImage {
   display: block;
+
   width: 44px;
   height: 44px;
-  object-fit: contain;
+
+  color: #000;
 }
 
 .logo:active {
   transform: scale(0.96);
-  filter: brightness(0.9);
 }
 
 .logoSpin {
-  animation: logoSpin 550ms cubic-bezier(0.22, 1, 0.36, 1);
+  animation: logoSpin 600ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes logoSpin {
-  from {
+  0% {
     transform: rotate(0deg);
+    color: #000;
   }
 
-  to {
+  28% {
+    color: #323232;
+  }
+
+  42% {
+    color: #606060;
+  }
+
+  56% {
+    color: #383838;
+  }
+
+  72% {
+    color: #121212;
+  }
+
+  82% {
+    color: #000;
+  }
+
+  100% {
     transform: rotate(360deg);
+    color: #000;
   }
 }
 
 .nav {
+  position: relative;
+
   justify-self: center;
 
   display: flex;
@@ -72,7 +95,37 @@
   gap: 8px;
 }
 
+.activeIndicator {
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  width: var(--indicator-width);
+
+  border-radius: 2px;
+
+  background: #000;
+
+  opacity: var(--indicator-opacity);
+
+  transform: translateX(var(--indicator-x));
+
+  pointer-events: none;
+
+  transition:
+    transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    width 420ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 120ms ease;
+
+  will-change: transform, width;
+}
+
 .link {
+  position: relative;
+  z-index: 1;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +135,7 @@
 
   border-radius: 2px;
 
-  background-color: transparent;
+  background: transparent;
   color: #000;
 
   text-decoration: none;
@@ -91,23 +144,49 @@
   font-weight: 500;
   line-height: 1;
 
+  cursor: var(--cursor-pointer);
+
   transition:
-    background-color 160ms ease,
-    color 160ms ease,
+    color 180ms ease,
     transform 100ms cubic-bezier(0.2, 0, 0, 1);
 }
 
-.link:hover {
-  background-color: #c47a5a80;
+.link::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  border-radius: inherit;
+
+  background: #c47a5a80;
+
+  opacity: 0;
+  transform: scale(0.88);
+
+  transition:
+    opacity 180ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link:hover:not(.active)::before {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .link:active {
   transform: scale(0.97);
+  cursor: var(--cursor-grabbing);
 }
 
 .link.active {
-  background-color: #000;
   color: #fff;
+}
+
+.link.active::before {
+  opacity: 0;
 }
 
 .actions {
@@ -252,6 +331,15 @@
     justify-content: flex-start;
 
     box-sizing: border-box;
+  }
+
+  .mobileNav .link.active {
+    background: #000;
+    color: #fff;
+  }
+
+  .mobileNav .link.active::before {
+    opacity: 0;
   }
 
   .mobileLanguage {
