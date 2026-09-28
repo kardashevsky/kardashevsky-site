@@ -1,9 +1,22 @@
 import styles from "./HomePage.module.css"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
+import { motion, useReducedMotion } from "motion/react"
 import InteractiveFace from "../../components/InteractiveFace/InteractiveFace"
+import { AnimatedTitle } from "../../components/AnimatedTitle/AnimatedTitle"
+import { HOME_INTRO_EVENT } from "../../app/events"
 
 export default function HomePage() {
   const { t } = useTranslation()
+  const shouldReduceMotion = useReducedMotion()
+  const [introKey, setIntroKey] = useState(0)
+
+  useEffect(() => {
+    const replayIntro = () => setIntroKey((key) => key + 1)
+
+    window.addEventListener(HOME_INTRO_EVENT, replayIntro)
+    return () => window.removeEventListener(HOME_INTRO_EVENT, replayIntro)
+  }, [])
 
   return (
     <div className={styles.home}>
@@ -66,21 +79,40 @@ export default function HomePage() {
       </svg>
 
       <div className={styles.content}>
-        <InteractiveFace />
+        <InteractiveFace animationKey={introKey} />
 
-        <h1 className={styles.title}>
-          <span className={styles.firstName}>
-            {t("home.firstName")}
-          </span>
+        <AnimatedTitle
+          key={introKey}
+          className={styles.title}
+          lines={[
+            { text: t("home.firstName"), className: styles.firstName },
+            { text: t("home.lastName"), className: styles.lastName },
+          ]}
+        />
 
-          <span className={styles.lastName}>
-            {t("home.lastName")}
-          </span>
-        </h1>
-
-        <p className={styles.positioning}>
+        <motion.p
+          key={`positioning-${introKey}`}
+          className={styles.positioning}
+          initial={shouldReduceMotion ? false : {
+            opacity: 0,
+            y: 8,
+            filter: "blur(5px)",
+            letterSpacing: "0.2em",
+          }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            filter: "blur(0px)",
+            letterSpacing: "0.12em",
+          }}
+          transition={{
+            duration: shouldReduceMotion ? 0 : 0.85,
+            delay: shouldReduceMotion ? 0 : 0.48,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        >
           {t("home.positioning")}
-        </p>
+        </motion.p>
       </div>
     </div>
   )

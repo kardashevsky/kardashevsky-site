@@ -9,6 +9,7 @@ import {
 import face from "../../assets/face.webp"
 import HeartIcon from "./HeartIcon"
 import styles from "./InteractiveFace.module.css"
+import { motion, useReducedMotion } from "motion/react"
 
 type Heart = {
   id: number
@@ -30,8 +31,13 @@ const DRAG_RESISTANCE = 0.08
 const DRAG_THRESHOLD = 4
 const DRAG_INERTIA = 0.055
 
-export default function InteractiveFace() {
+type InteractiveFaceProps = {
+  animationKey?: number
+}
+
+export default function InteractiveFace({ animationKey = 0 }: InteractiveFaceProps) {
   const [hearts, setHearts] = useState<Heart[]>([])
+  const shouldReduceMotion = useReducedMotion()
 
   const nextId = useRef(0)
 
@@ -466,9 +472,17 @@ export default function InteractiveFace() {
   }
 
   return (
-    <div
+    <motion.div
+      key={animationKey}
       ref={wrapperRef}
       className={styles.wrapper}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 18, scale: 0.965, filter: "blur(10px)" }}
+      animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+      transition={{
+        duration: shouldReduceMotion ? 0 : 1.05,
+        delay: shouldReduceMotion ? 0 : 0.08,
+        ease: [0.16, 1, 0.3, 1],
+      }}
     >
       <img
         ref={faceRef}
@@ -513,6 +527,6 @@ export default function InteractiveFace() {
           <HeartIcon />
         </span>
       ))}
-    </div>
+    </motion.div>
   )
 }

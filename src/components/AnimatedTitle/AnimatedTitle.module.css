@@ -1,0 +1,20 @@
+.title {
+  perspective: 700px;
+}
+
+.titleText,
+.line {
+  display: block;
+}
+
+.letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter {
+    will-change: auto;
+  }
+}

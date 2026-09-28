@@ -1,0 +1,39 @@
+{
+  "home": {
+    "firstName": "DMITRY",
+    "lastName": "KARDASHEVSKY",
+    "positioning": "JE CRÉE DES PRODUITS NUMÉRIQUES",
+    "aboutButton": "À PROPOS"
+  },
+  "about": {
+    "eyebrow": "À propos",
+    "title": "Contenu bientôt disponible.",
+    "description": "Cette page est en cours de développement. Elle présentera bientôt mon parcours, mon expérience et mon approche du travail.",
+    "resumeButton": "CV"
+  },
+  "projects": {
+    "eyebrow": "Projets",
+    "title": "Projets sélectionnés.",
+    "description": "Une sélection de produits numériques sur lesquels j’ai travaillé."
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact"
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Échangeons",
+    "description": "Disponible pour collaborer sur des produits numériques et des projets ambitieux.",
+    "telegram": "Telegram",
+    "email": "E-mail"
+  },
+  "resume": {
+    "eyebrow": "CV",
+    "name": "Dmitry Kardashevsky",
+    "description": "Créateur de produits numériques.",
+    "view": "Voir le PDF",
+    "download": "Télécharger"
+  }
+}

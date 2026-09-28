@@ -21,6 +21,8 @@
   pointer-events: none;
   z-index: -1;
 
+  animation: gridReveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) 100ms both;
+
 -webkit-mask-image: linear-gradient(
   to bottom,
   transparent 45%,
@@ -40,6 +42,18 @@ mask-image: linear-gradient(
   rgba(0, 0, 0, 0.7) 62%,
   #000 69%
 );
+}
+
+@keyframes gridReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(1.01);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .gridLines {
@@ -78,11 +92,12 @@ mask-image: linear-gradient(
 
   text-align: center;
 
-  user-select: none;
-}
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.75),
+    0 8px 20px rgba(2, 2, 2, 0.1),
+    0 22px 48px rgba(2, 2, 2, 0.08);
 
-.title span {
-  display: block;
+  user-select: none;
 }
 
 .firstName {
@@ -169,5 +184,11 @@ mask-image: linear-gradient(
     letter-spacing: 0.12em;
 
     white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grid {
+    animation: none;
   }
 }
